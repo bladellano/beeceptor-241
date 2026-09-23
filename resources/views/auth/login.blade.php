@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login — {{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ \App\Support\AssetVersion::url('css/admin.css') }}">
 </head>
 <body>
 <div class="auth-wrap">

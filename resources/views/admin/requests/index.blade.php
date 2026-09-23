@@ -34,5 +34,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/requests-refresh.js') }}" defer></script>
+    <script src="{{ \App\Support\AssetVersion::url('js/requests-refresh.js') }}" defer></script>
 @endpush
