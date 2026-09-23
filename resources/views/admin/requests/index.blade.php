@@ -3,23 +3,36 @@
 @section('title', 'Requests')
 
 @section('content')
-    <h1>Requests — {{ $endpoint->name }}</h1>
-    <p><a href="{{ route('admin.endpoints.show', $endpoint) }}">&larr; Back to endpoint</a></p>
+    <div class="page-toolbar">
+        <div>
+            <h1>Requests — {{ $endpoint->name }}</h1>
+            <p><a href="{{ route('admin.endpoints.show', $endpoint) }}">&larr; Back to endpoint</a></p>
+        </div>
+        <div class="refresh-control">
+            <label for="requests-refresh-interval">Refresh</label>
+            <select
+                id="requests-refresh-interval"
+                data-poll-url="{{ route('admin.endpoints.requests.index', $endpoint) }}"
+            >
+                <option value="0">Off</option>
+                <option value="5">5s</option>
+                <option value="10">10s</option>
+                <option value="15">15s</option>
+                <option value="30">30s</option>
+                <option value="60">60s</option>
+            </select>
+            <span id="requests-refresh-status" class="refresh-status" aria-live="polite"></span>
+        </div>
+    </div>
     <table>
         <thead><tr><th>Time</th><th>Method</th><th>Path</th><th>Status</th><th>Rule</th><th>Fallback</th><th>Duration</th></tr></thead>
-        <tbody>
-        @foreach ($requests as $log)
-            <tr>
-                <td>{{ $log->created_at?->format('Y-m-d H:i:s') }}</td>
-                <td class="method">{{ $log->method }}</td>
-                <td><a href="{{ route('admin.endpoints.requests.show', [$endpoint, $log]) }}">{{ $log->path }}</a></td>
-                <td>{{ $log->response_status }}</td>
-                <td>{{ $log->matchedRule?->name ?? '—' }}</td>
-                <td>{{ $log->fallback_used ? 'Yes' : 'No' }}</td>
-                <td>{{ $log->duration_ms }} ms</td>
-            </tr>
-        @endforeach
+        <tbody id="requests-table-body">
+            @include('admin.requests._rows')
         </tbody>
     </table>
     {{ $requests->links() }}
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/requests-refresh.js') }}" defer></script>
+@endpush
