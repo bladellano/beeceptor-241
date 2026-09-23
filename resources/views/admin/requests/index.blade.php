@@ -25,7 +25,7 @@
         </div>
     </div>
     <table>
-        <thead><tr><th>Time</th><th>Method</th><th>Path</th><th>Status</th><th>Rule</th><th>Fallback</th><th>Duration</th></tr></thead>
+        <thead><tr><th>Time</th><th>Method</th><th>Path</th><th>Status</th><th>Origem</th><th>Rule</th><th>Fallback</th><th>Duration</th></tr></thead>
         <tbody id="requests-table-body">
             @include('admin.requests._rows')
         </tbody>

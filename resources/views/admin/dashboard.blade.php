@@ -31,7 +31,7 @@
     <div class="card">
         <h2>Latest requests</h2>
         <table>
-            <thead><tr><th>Time</th><th>Endpoint</th><th>Method</th><th>Path</th><th>Status</th></tr></thead>
+            <thead><tr><th>Time</th><th>Endpoint</th><th>Method</th><th>Path</th><th>Status</th><th>Origem</th></tr></thead>
             <tbody>
             @forelse ($latestRequests as $log)
                 <tr>
@@ -40,9 +40,10 @@
                     <td class="method">{{ $log->method }}</td>
                     <td><a href="{{ route('admin.endpoints.requests.show', [$log->endpoint, $log]) }}">{{ $log->path }}</a></td>
                     <td>{{ $log->response_status }}</td>
+                    <td><code>{{ $log->ip_address ?? '—' }}</code></td>
                 </tr>
             @empty
-                <tr><td colspan="5">No requests captured yet.</td></tr>
+                <tr><td colspan="6">No requests captured yet.</td></tr>
             @endforelse
             </tbody>
         </table>

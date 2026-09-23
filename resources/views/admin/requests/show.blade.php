@@ -24,7 +24,7 @@
         <p><strong>Method:</strong> <span class="method">{{ $requestLog->method }}</span></p>
         <p><strong>URL:</strong> {{ $requestLog->url }}</p>
         <p><strong>Path:</strong> <code>{{ $requestLog->path }}</code></p>
-        <p><strong>IP:</strong> {{ $requestLog->ip_address }}</p>
+        <p><strong>Origem (IP):</strong> <code>{{ $requestLog->ip_address ?? '—' }}</code></p>
         <p><strong>User Agent:</strong> {{ $requestLog->user_agent }}</p>
         <h3>Query parameters</h3>
         <pre class="json">{{ $formatJson(json_encode($requestLog->query_parameters)) }}</pre>
