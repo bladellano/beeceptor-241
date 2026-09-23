@@ -33,7 +33,7 @@ php artisan migrate --seed
 php artisan serve
 ```
 
-Acesse `http://127.0.0.1:8000/login` com as credenciais do `.env` (`ADMIN_EMAIL` / `ADMIN_PASSWORD`, padrão `admin@example.com` / `password`).
+Acesse `http://127.0.0.1:8002/login` com as credenciais do `.env` (`ADMIN_EMAIL` / `ADMIN_PASSWORD`, padrão `admin@example.com` / `password`).
 
 ## Uso rápido
 
@@ -41,14 +41,14 @@ Acesse `http://127.0.0.1:8000/login` com as credenciais do `.env` (`ADMIN_EMAIL`
 2. Teste sem regra:
 
 ```bash
-curl -i http://127.0.0.1:8000/payment-test/users
+curl -i http://127.0.0.1:8002/payment-test/users
 ```
 
 3. Crie uma regra `POST /users` com status `201` e body JSON.
 4. Envie novamente:
 
 ```bash
-curl -i -X POST http://127.0.0.1:8000/payment-test/users \
+curl -i -X POST http://127.0.0.1:8002/payment-test/users \
   -H "Content-Type: application/json" \
   -d '{"name":"John"}'
 ```
