@@ -80,11 +80,9 @@ Executa `requests:prune` diariamente.
 docker compose up --build
 ```
 
-App em `http://localhost:8080`. Rode migrations dentro do container:
+App em `http://localhost:8080`. O container roda migrations, seed do admin e caches ao iniciar (`docker/entrypoint.sh`).
 
-```bash
-docker compose exec app php artisan migrate --seed
-```
+Em PaaS (Easypanel, Coolify etc.), use o build por **Dockerfile**, porta **80**. Com SQLite, monte um volume persistente e aponte `DB_DATABASE` para ele (ex.: `/data/database.sqlite`).
 
 ## Deploy VPS (Nginx + PHP-FPM)
 

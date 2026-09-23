@@ -1,29 +1,21 @@
 services:
   app:
     build: .
-    volumes:
-      - .:/var/www/html
+    ports:
+      - "8080:80"
     depends_on:
       - db
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
+      APP_KEY: ${APP_KEY}
+      APP_URL: http://localhost:8080
       DB_CONNECTION: mysql
       DB_HOST: db
       DB_PORT: 3306
       DB_DATABASE: mock
       DB_USERNAME: mock
       DB_PASSWORD: secret
-
-  web:
-    image: nginx:1.27-alpine
-    ports:
-      - "8080:80"
-    volumes:
-      - .:/var/www/html
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    depends_on:
-      - app
 
   db:
     image: mariadb:11

@@ -30,6 +30,8 @@ return Application::configure(basePath: dirname(__DIR__))
             MockRateLimit::class,
         ]);
 
+        $middleware->trustProxies(at: '*');
+
         $middleware->redirectGuestsTo(fn () => route('login'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
