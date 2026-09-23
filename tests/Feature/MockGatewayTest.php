@@ -39,6 +39,21 @@ class MockGatewayTest extends TestCase
             ->assertJson(['message' => 'Mock endpoint is disabled.']);
     }
 
+    public function test_post_without_csrf_token_reaches_the_mock(): void
+    {
+        $endpoint = $this->createEndpoint(['slug' => 'ft241']);
+
+        $this->post('/ft241/api/v2/integration/login', ['user_id' => 'trk_10'], [
+            'Accept' => 'application/json',
+        ])->assertOk();
+
+        $this->assertDatabaseHas('request_logs', [
+            'endpoint_id' => $endpoint->id,
+            'method' => 'POST',
+            'path' => '/api/v2/integration/login',
+        ]);
+    }
+
     public function test_fallback_response_when_no_rule_matches(): void
     {
         $endpoint = $this->createEndpoint(['slug' => 'payment-test']);

@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\EndpointController;
 use App\Http\Controllers\Admin\MockRuleController;
 use App\Http\Controllers\Admin\RequestLogController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\MockGatewayController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,8 +38,3 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('endpoints/{endpoint}/requests', [RequestLogController::class, 'index'])->name('endpoints.requests.index');
     Route::get('endpoints/{endpoint}/requests/{requestLog}', [RequestLogController::class, 'show'])->name('endpoints.requests.show');
 });
-
-Route::middleware(['mock.public'])
-    ->any('{slug}/{path?}', [MockGatewayController::class, 'handle'])
-    ->where('slug', '[a-z0-9-]+')
-    ->where('path', '.*');
